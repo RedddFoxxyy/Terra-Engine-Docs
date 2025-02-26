@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["__pyfunction_init_gl_window","__pyfunction_set_window_icon","init_gl_window","init_opengl_drawing","register_window_module","set_window_icon"]};
