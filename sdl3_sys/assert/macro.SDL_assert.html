@@ -1,0 +1,29 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="An assertion test that is normally performed only in debug builds."><title>SDL_assert in sdl3_sys::assert - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../static.files/rustdoc-46132b98.css"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="sdl3_sys" data-themes="" data-resource-suffix="" data-rustdoc-version="1.85.0 (4d91de4e4 2025-02-17)" data-channel="1.85.0" data-search-js="search-75f5ac3e.js" data-settings-js="settings-0f613d39.js" ><script src="../../static.files/storage-59e33391.js"></script><script defer src="sidebar-items.js"></script><script defer src="../../static.files/main-5f194d8c.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-893ab5e7.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-6580c154.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg"></head><body class="rustdoc macro"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../../sdl3_sys/index.html">sdl3_<wbr>sys</a><span class="version">0.4.4+SDL3-3.2.4</span></h2></div><div class="sidebar-elems"><section id="rustdoc-toc"><h2 class="location"><a href="#">SDL_<wbr>assert</a></h2><h3><a href="#">Sections</a></h3><ul class="block top-toc"><li><a href="#parameters" title="Parameters">Parameters</a></li><li><a href="#thread-safety" title="Thread safety">Thread safety</a></li><li><a href="#availability" title="Availability">Availability</a></li></ul></section><div id="rustdoc-modnav"><h2><a href="index.html">In sdl3_<wbr>sys::<wbr>assert</a></h2></div></div></nav><div class="sidebar-resizer"></div><main><div class="width-limiter"><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><span class="rustdoc-breadcrumbs"><a href="../index.html">sdl3_sys</a>::<wbr><a href="index.html">assert</a></span><h1>Macro <span class="macro">SDL_assert</span><button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"><a class="src" href="../../src/sdl3_sys/generated/assert.rs.html#441-443">Source</a> </span></div><pre class="rust item-decl"><code>macro_rules! SDL_assert {
+    ($condition:expr) =&gt; { ... };
+}</code></pre><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>An assertion test that is normally performed only in debug builds.</p>
+<p>This macro is enabled when the <a href="constant.SDL_ASSERT_LEVEL.html" title="constant sdl3_sys::assert::SDL_ASSERT_LEVEL"><code>SDL_ASSERT_LEVEL</code></a> is &gt;= 2, otherwise it is
+disabled. This is meant to only do these tests in debug builds, so they can
+tend to be more expensive, and they are meant to bring everything to a halt
+when they fail, with the programmer there to assess the problem.</p>
+<p>In short: you can sprinkle these around liberally and assume they will
+evaporate out of the build when building for end-users.</p>
+<p>When assertions are disabled, this wraps <code>condition</code> in a <code>sizeof</code>
+operator, which means any function calls and side effects will not run, but
+the compiler will not complain about any otherwise-unused variables that
+are only referenced in the assertion.</p>
+<p>One can set the environment variable “SDL_ASSERT” to one of several strings
+(“abort”, “break”, “retry”, “ignore”, “always_ignore”) to force a default
+behavior, which may be desirable for automation purposes. If your platform
+requires GUI interfaces to happen on the main thread but you’re debugging
+an assertion in a background thread, it might be desirable to set this to
+“break” so that your debugger takes control as soon as assert is triggered,
+instead of risking a bad UI interaction (deadlock, etc) in the application.</p>
+<h4 id="parameters"><a class="doc-anchor" href="#parameters">§</a>Parameters</h4>
+<ul>
+<li><code>condition</code>: boolean value to test.</li>
+</ul>
+<h4 id="thread-safety"><a class="doc-anchor" href="#thread-safety">§</a>Thread safety</h4>
+<p>It is safe to call this macro from any thread.</p>
+<h4 id="availability"><a class="doc-anchor" href="#availability">§</a>Availability</h4>
+<p>This macro is available since SDL 3.2.0.</p>
+</div></details></section></div></main></body></html>

@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["__pyfunction_draw_color_changing_shapes","__pyfunction_run_color_gradient","draw_color_changing_shapes","hsv_to_rgb","register_test_module","run_color_gradient"]};

@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["register_objects_module"],"mod":["tengine_place_img"]};

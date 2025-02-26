@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"constant":["SDL_MAIN_HANDLED"],"fn":["SDL_AppEvent","SDL_AppInit","SDL_AppIterate","SDL_AppQuit","SDL_EnterAppMainCallbacks","SDL_GDKSuspendComplete","SDL_RegisterApp","SDL_RunApp","SDL_SetMainReady","SDL_UnregisterApp","SDL_main"],"type":["SDL_main_func"]};

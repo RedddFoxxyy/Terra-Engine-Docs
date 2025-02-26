@@ -1,0 +1,72 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Open a specific audio device."><title>SDL_OpenAudioDevice in sdl3_sys::audio - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../static.files/rustdoc-46132b98.css"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="sdl3_sys" data-themes="" data-resource-suffix="" data-rustdoc-version="1.85.0 (4d91de4e4 2025-02-17)" data-channel="1.85.0" data-search-js="search-75f5ac3e.js" data-settings-js="settings-0f613d39.js" ><script src="../../static.files/storage-59e33391.js"></script><script defer src="sidebar-items.js"></script><script defer src="../../static.files/main-5f194d8c.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-893ab5e7.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-6580c154.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg"></head><body class="rustdoc fn"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../../sdl3_sys/index.html">sdl3_<wbr>sys</a><span class="version">0.4.4+SDL3-3.2.4</span></h2></div><div class="sidebar-elems"><section id="rustdoc-toc"><h2 class="location"><a href="#">SDL_<wbr>Open<wbr>Audio<wbr>Device</a></h2><h3><a href="#">Sections</a></h3><ul class="block top-toc"><li><a href="#parameters" title="Parameters">Parameters</a></li><li><a href="#return-value" title="Return value">Return value</a></li><li><a href="#thread-safety" title="Thread safety">Thread safety</a></li><li><a href="#availability" title="Availability">Availability</a></li><li><a href="#see-also" title="See also">See also</a></li></ul></section><div id="rustdoc-modnav"><h2><a href="index.html">In sdl3_<wbr>sys::<wbr>audio</a></h2></div></div></nav><div class="sidebar-resizer"></div><main><div class="width-limiter"><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><span class="rustdoc-breadcrumbs"><a href="../index.html">sdl3_sys</a>::<wbr><a href="index.html">audio</a></span><h1>Function <span class="fn">SDL_OpenAudioDevice</span><button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"><a class="src" href="../../src/sdl3_sys/generated/audio.rs.html#887-890">Source</a> </span></div><pre class="rust item-decl"><code>pub unsafe extern &quot;C&quot; fn SDL_OpenAudioDevice(
+    devid: <a class="type" href="type.SDL_AudioDeviceID.html" title="type sdl3_sys::audio::SDL_AudioDeviceID">SDL_AudioDeviceID</a>,
+    spec: <a class="primitive" href="https://doc.rust-lang.org/1.85.0/core/primitive.pointer.html">*const </a><a class="struct" href="struct.SDL_AudioSpec.html" title="struct sdl3_sys::audio::SDL_AudioSpec">SDL_AudioSpec</a>,
+) -&gt; <a class="type" href="type.SDL_AudioDeviceID.html" title="type sdl3_sys::audio::SDL_AudioDeviceID">SDL_AudioDeviceID</a></code></pre><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Open a specific audio device.</p>
+<p>You can open both playback and recording devices through this function.
+Playback devices will take data from bound audio streams, mix it, and send
+it to the hardware. Recording devices will feed any bound audio streams
+with a copy of any incoming data.</p>
+<p>An opened audio device starts out with no audio streams bound. To start
+audio playing, bind a stream and supply audio data to it. Unlike SDL2,
+there is no audio callback; you only bind audio streams and make sure they
+have data flowing into them (however, you can simulate SDL2’s semantics
+fairly closely by using <a href="fn.SDL_OpenAudioDeviceStream.html" title="fn sdl3_sys::audio::SDL_OpenAudioDeviceStream"><code>SDL_OpenAudioDeviceStream</code></a> instead of this
+function).</p>
+<p>If you don’t care about opening a specific device, pass a <code>devid</code> of either
+<a href="constant.SDL_AUDIO_DEVICE_DEFAULT_PLAYBACK.html" title="constant sdl3_sys::audio::SDL_AUDIO_DEVICE_DEFAULT_PLAYBACK"><code>SDL_AUDIO_DEVICE_DEFAULT_PLAYBACK</code></a> or
+<a href="constant.SDL_AUDIO_DEVICE_DEFAULT_RECORDING.html" title="constant sdl3_sys::audio::SDL_AUDIO_DEVICE_DEFAULT_RECORDING"><code>SDL_AUDIO_DEVICE_DEFAULT_RECORDING</code></a>. In this case, SDL will try to pick
+the most reasonable default, and may also switch between physical devices
+seamlessly later, if the most reasonable default changes during the
+lifetime of this opened device (user changed the default in the OS’s system
+preferences, the default got unplugged so the system jumped to a new
+default, the user plugged in headphones on a mobile device, etc). Unless
+you have a good reason to choose a specific device, this is probably what
+you want.</p>
+<p>You may request a specific format for the audio device, but there is no
+promise the device will honor that request for several reasons. As such,
+it’s only meant to be a hint as to what data your app will provide. Audio
+streams will accept data in whatever format you specify and manage
+conversion for you as appropriate. <a href="fn.SDL_GetAudioDeviceFormat.html" title="fn sdl3_sys::audio::SDL_GetAudioDeviceFormat"><code>SDL_GetAudioDeviceFormat</code></a> can tell you
+the preferred format for the device before opening and the actual format
+the device is using after opening.</p>
+<p>It’s legal to open the same device ID more than once; each successful open
+will generate a new logical <a href="type.SDL_AudioDeviceID.html" title="type sdl3_sys::audio::SDL_AudioDeviceID"><code>SDL_AudioDeviceID</code></a> that is managed separately
+from others on the same physical device. This allows libraries to open a
+device separately from the main app and bind its own streams without
+conflicting.</p>
+<p>It is also legal to open a device ID returned by a previous call to this
+function; doing so just creates another logical device on the same physical
+device. This may be useful for making logical groupings of audio streams.</p>
+<p>This function returns the opened device ID on success. This is a new,
+unique <a href="type.SDL_AudioDeviceID.html" title="type sdl3_sys::audio::SDL_AudioDeviceID"><code>SDL_AudioDeviceID</code></a> that represents a logical device.</p>
+<p>Some backends might offer arbitrary devices (for example, a networked audio
+protocol that can connect to an arbitrary server). For these, as a change
+from SDL2, you should open a default device ID and use an SDL hint to
+specify the target if you care, or otherwise let the backend figure out a
+reasonable default. Most backends don’t offer anything like this, and often
+this would be an end user setting an environment variable for their custom
+need, and not something an application should specifically manage.</p>
+<p>When done with an audio device, possibly at the end of the app’s life, one
+should call <a href="fn.SDL_CloseAudioDevice.html" title="fn sdl3_sys::audio::SDL_CloseAudioDevice"><code>SDL_CloseAudioDevice()</code></a> on the returned device id.</p>
+<h4 id="parameters"><a class="doc-anchor" href="#parameters">§</a>Parameters</h4>
+<ul>
+<li><code>devid</code>: the device instance id to open, or
+<a href="constant.SDL_AUDIO_DEVICE_DEFAULT_PLAYBACK.html" title="constant sdl3_sys::audio::SDL_AUDIO_DEVICE_DEFAULT_PLAYBACK"><code>SDL_AUDIO_DEVICE_DEFAULT_PLAYBACK</code></a> or
+<a href="constant.SDL_AUDIO_DEVICE_DEFAULT_RECORDING.html" title="constant sdl3_sys::audio::SDL_AUDIO_DEVICE_DEFAULT_RECORDING"><code>SDL_AUDIO_DEVICE_DEFAULT_RECORDING</code></a> for the most reasonable
+default device.</li>
+<li><code>spec</code>: the requested device configuration. Can be NULL to use
+reasonable defaults.</li>
+</ul>
+<h4 id="return-value"><a class="doc-anchor" href="#return-value">§</a>Return value</h4>
+<p>Returns the device ID on success or 0 on failure; call <a href="../error/fn.SDL_GetError.html" title="fn sdl3_sys::error::SDL_GetError"><code>SDL_GetError()</code></a> for
+more information.</p>
+<h4 id="thread-safety"><a class="doc-anchor" href="#thread-safety">§</a>Thread safety</h4>
+<p>It is safe to call this function from any thread.</p>
+<h4 id="availability"><a class="doc-anchor" href="#availability">§</a>Availability</h4>
+<p>This function is available since SDL 3.2.0.</p>
+<h4 id="see-also"><a class="doc-anchor" href="#see-also">§</a>See also</h4>
+<ul>
+<li><a href="fn.SDL_CloseAudioDevice.html" title="fn sdl3_sys::audio::SDL_CloseAudioDevice"><code>SDL_CloseAudioDevice</code></a></li>
+<li><a href="fn.SDL_GetAudioDeviceFormat.html" title="fn sdl3_sys::audio::SDL_GetAudioDeviceFormat"><code>SDL_GetAudioDeviceFormat</code></a></li>
+</ul>
+</div></details></section></div></main></body></html>

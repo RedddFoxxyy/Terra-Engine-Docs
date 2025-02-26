@@ -1,0 +1,51 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Check the event queue for messages and optionally return them."><title>SDL_PeepEvents in sdl3_sys::events - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../static.files/rustdoc-46132b98.css"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="sdl3_sys" data-themes="" data-resource-suffix="" data-rustdoc-version="1.85.0 (4d91de4e4 2025-02-17)" data-channel="1.85.0" data-search-js="search-75f5ac3e.js" data-settings-js="settings-0f613d39.js" ><script src="../../static.files/storage-59e33391.js"></script><script defer src="sidebar-items.js"></script><script defer src="../../static.files/main-5f194d8c.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-893ab5e7.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-6580c154.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg"></head><body class="rustdoc fn"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../../sdl3_sys/index.html">sdl3_<wbr>sys</a><span class="version">0.4.4+SDL3-3.2.4</span></h2></div><div class="sidebar-elems"><section id="rustdoc-toc"><h2 class="location"><a href="#">SDL_<wbr>Peep<wbr>Events</a></h2><h3><a href="#">Sections</a></h3><ul class="block top-toc"><li><a href="#parameters" title="Parameters">Parameters</a></li><li><a href="#return-value" title="Return value">Return value</a></li><li><a href="#thread-safety" title="Thread safety">Thread safety</a></li><li><a href="#availability" title="Availability">Availability</a></li><li><a href="#see-also" title="See also">See also</a></li></ul></section><div id="rustdoc-modnav"><h2><a href="index.html">In sdl3_<wbr>sys::<wbr>events</a></h2></div></div></nav><div class="sidebar-resizer"></div><main><div class="width-limiter"><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><span class="rustdoc-breadcrumbs"><a href="../index.html">sdl3_sys</a>::<wbr><a href="index.html">events</a></span><h1>Function <span class="fn">SDL_PeepEvents</span><button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"><a class="src" href="../../src/sdl3_sys/generated/events.rs.html#2065-2071">Source</a> </span></div><pre class="rust item-decl"><code>pub unsafe extern &quot;C&quot; fn SDL_PeepEvents(
+    events: <a class="primitive" href="https://doc.rust-lang.org/1.85.0/core/primitive.pointer.html">*mut </a><a class="union" href="union.SDL_Event.html" title="union sdl3_sys::events::SDL_Event">SDL_Event</a>,
+    numevents: <a class="type" href="https://doc.rust-lang.org/1.85.0/core/ffi/type.c_int.html" title="type core::ffi::c_int">c_int</a>,
+    action: <a class="struct" href="struct.SDL_EventAction.html" title="struct sdl3_sys::events::SDL_EventAction">SDL_EventAction</a>,
+    minType: <a class="type" href="../stdinc/type.Uint32.html" title="type sdl3_sys::stdinc::Uint32">Uint32</a>,
+    maxType: <a class="type" href="../stdinc/type.Uint32.html" title="type sdl3_sys::stdinc::Uint32">Uint32</a>,
+) -&gt; <a class="type" href="https://doc.rust-lang.org/1.85.0/core/ffi/type.c_int.html" title="type core::ffi::c_int">c_int</a></code></pre><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Check the event queue for messages and optionally return them.</p>
+<p><code>action</code> may be any of the following:</p>
+<ul>
+<li><a href="constant.SDL_ADDEVENT.html" title="constant sdl3_sys::events::SDL_ADDEVENT"><code>SDL_ADDEVENT</code></a>: up to <code>numevents</code> events will be added to the back of the
+event queue.</li>
+<li><a href="constant.SDL_PEEKEVENT.html" title="constant sdl3_sys::events::SDL_PEEKEVENT"><code>SDL_PEEKEVENT</code></a>: <code>numevents</code> events at the front of the event queue,
+within the specified minimum and maximum type, will be returned to the
+caller and will <em>not</em> be removed from the queue. If you pass NULL for
+<code>events</code>, then <code>numevents</code> is ignored and the total number of matching
+events will be returned.</li>
+<li><a href="constant.SDL_GETEVENT.html" title="constant sdl3_sys::events::SDL_GETEVENT"><code>SDL_GETEVENT</code></a>: up to <code>numevents</code> events at the front of the event queue,
+within the specified minimum and maximum type, will be returned to the
+caller and will be removed from the queue.</li>
+</ul>
+<p>You may have to call <a href="fn.SDL_PumpEvents.html" title="fn sdl3_sys::events::SDL_PumpEvents"><code>SDL_PumpEvents()</code></a> before calling this function.
+Otherwise, the events may not be ready to be filtered when you call
+<a href="fn.SDL_PeepEvents.html" title="fn sdl3_sys::events::SDL_PeepEvents"><code>SDL_PeepEvents()</code></a>.</p>
+<h4 id="parameters"><a class="doc-anchor" href="#parameters">§</a>Parameters</h4>
+<ul>
+<li><code>events</code>: destination buffer for the retrieved events, may be NULL to
+leave the events in the queue and return the number of events
+that would have been stored.</li>
+<li><code>numevents</code>: if action is <a href="constant.SDL_ADDEVENT.html" title="constant sdl3_sys::events::SDL_ADDEVENT"><code>SDL_ADDEVENT</code></a>, the number of events to add
+back to the event queue; if action is <a href="constant.SDL_PEEKEVENT.html" title="constant sdl3_sys::events::SDL_PEEKEVENT"><code>SDL_PEEKEVENT</code></a> or
+<a href="constant.SDL_GETEVENT.html" title="constant sdl3_sys::events::SDL_GETEVENT"><code>SDL_GETEVENT</code></a>, the maximum number of events to retrieve.</li>
+<li><code>action</code>: action to take; see [[#action|Remarks]] for details.</li>
+<li><code>minType</code>: minimum value of the event type to be considered;
+<a href="constant.SDL_EVENT_FIRST.html" title="constant sdl3_sys::events::SDL_EVENT_FIRST"><code>SDL_EVENT_FIRST</code></a> is a safe choice.</li>
+<li><code>maxType</code>: maximum value of the event type to be considered;
+<a href="constant.SDL_EVENT_LAST.html" title="constant sdl3_sys::events::SDL_EVENT_LAST"><code>SDL_EVENT_LAST</code></a> is a safe choice.</li>
+</ul>
+<h4 id="return-value"><a class="doc-anchor" href="#return-value">§</a>Return value</h4>
+<p>Returns the number of events actually stored or -1 on failure; call
+<a href="../error/fn.SDL_GetError.html" title="fn sdl3_sys::error::SDL_GetError"><code>SDL_GetError()</code></a> for more information.</p>
+<h4 id="thread-safety"><a class="doc-anchor" href="#thread-safety">§</a>Thread safety</h4>
+<p>It is safe to call this function from any thread.</p>
+<h4 id="availability"><a class="doc-anchor" href="#availability">§</a>Availability</h4>
+<p>This function is available since SDL 3.2.0.</p>
+<h4 id="see-also"><a class="doc-anchor" href="#see-also">§</a>See also</h4>
+<ul>
+<li><a href="fn.SDL_PollEvent.html" title="fn sdl3_sys::events::SDL_PollEvent"><code>SDL_PollEvent</code></a></li>
+<li><a href="fn.SDL_PumpEvents.html" title="fn sdl3_sys::events::SDL_PumpEvents"><code>SDL_PumpEvents</code></a></li>
+<li><a href="fn.SDL_PushEvent.html" title="fn sdl3_sys::events::SDL_PushEvent"><code>SDL_PushEvent</code></a></li>
+</ul>
+</div></details></section></div></main></body></html>

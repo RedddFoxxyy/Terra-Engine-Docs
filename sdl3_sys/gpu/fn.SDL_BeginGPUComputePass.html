@@ -1,0 +1,45 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Begins a compute pass on a command buffer."><title>SDL_BeginGPUComputePass in sdl3_sys::gpu - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../static.files/rustdoc-46132b98.css"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="sdl3_sys" data-themes="" data-resource-suffix="" data-rustdoc-version="1.85.0 (4d91de4e4 2025-02-17)" data-channel="1.85.0" data-search-js="search-75f5ac3e.js" data-settings-js="settings-0f613d39.js" ><script src="../../static.files/storage-59e33391.js"></script><script defer src="sidebar-items.js"></script><script defer src="../../static.files/main-5f194d8c.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-893ab5e7.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-6580c154.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg"></head><body class="rustdoc fn"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../../sdl3_sys/index.html">sdl3_<wbr>sys</a><span class="version">0.4.4+SDL3-3.2.4</span></h2></div><div class="sidebar-elems"><section id="rustdoc-toc"><h2 class="location"><a href="#">SDL_<wbr>BeginGPU<wbr>Compute<wbr>Pass</a></h2><h3><a href="#">Sections</a></h3><ul class="block top-toc"><li><a href="#parameters" title="Parameters">Parameters</a></li><li><a href="#return-value" title="Return value">Return value</a></li><li><a href="#availability" title="Availability">Availability</a></li><li><a href="#see-also" title="See also">See also</a></li></ul></section><div id="rustdoc-modnav"><h2><a href="index.html">In sdl3_<wbr>sys::<wbr>gpu</a></h2></div></div></nav><div class="sidebar-resizer"></div><main><div class="width-limiter"><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><span class="rustdoc-breadcrumbs"><a href="../index.html">sdl3_sys</a>::<wbr><a href="index.html">gpu</a></span><h1>Function <span class="fn">SDL_BeginGPUComputePass</span><button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"><a class="src" href="../../src/sdl3_sys/generated/gpu.rs.html#5360-5366">Source</a> </span></div><pre class="rust item-decl"><code>pub unsafe extern &quot;C&quot; fn SDL_BeginGPUComputePass(
+    command_buffer: <a class="primitive" href="https://doc.rust-lang.org/1.85.0/core/primitive.pointer.html">*mut </a><a class="struct" href="struct.SDL_GPUCommandBuffer.html" title="struct sdl3_sys::gpu::SDL_GPUCommandBuffer">SDL_GPUCommandBuffer</a>,
+    storage_texture_bindings: <a class="primitive" href="https://doc.rust-lang.org/1.85.0/core/primitive.pointer.html">*const </a><a class="struct" href="struct.SDL_GPUStorageTextureReadWriteBinding.html" title="struct sdl3_sys::gpu::SDL_GPUStorageTextureReadWriteBinding">SDL_GPUStorageTextureReadWriteBinding</a>,
+    num_storage_texture_bindings: <a class="type" href="../stdinc/type.Uint32.html" title="type sdl3_sys::stdinc::Uint32">Uint32</a>,
+    storage_buffer_bindings: <a class="primitive" href="https://doc.rust-lang.org/1.85.0/core/primitive.pointer.html">*const </a><a class="struct" href="struct.SDL_GPUStorageBufferReadWriteBinding.html" title="struct sdl3_sys::gpu::SDL_GPUStorageBufferReadWriteBinding">SDL_GPUStorageBufferReadWriteBinding</a>,
+    num_storage_buffer_bindings: <a class="type" href="../stdinc/type.Uint32.html" title="type sdl3_sys::stdinc::Uint32">Uint32</a>,
+) -&gt; <a class="primitive" href="https://doc.rust-lang.org/1.85.0/core/primitive.pointer.html">*mut </a><a class="struct" href="struct.SDL_GPUComputePass.html" title="struct sdl3_sys::gpu::SDL_GPUComputePass">SDL_GPUComputePass</a></code></pre><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Begins a compute pass on a command buffer.</p>
+<p>A compute pass is defined by a set of texture subresources and buffers that
+may be written to by compute pipelines. These textures and buffers must
+have been created with the COMPUTE_STORAGE_WRITE bit or the
+COMPUTE_STORAGE_SIMULTANEOUS_READ_WRITE bit. If you do not create a texture
+with COMPUTE_STORAGE_SIMULTANEOUS_READ_WRITE, you must not read from the
+texture in the compute pass. All operations related to compute pipelines
+must take place inside of a compute pass. You must not begin another
+compute pass, or a render pass or copy pass before ending the compute pass.</p>
+<p>A VERY IMPORTANT NOTE - Reads and writes in compute passes are NOT
+implicitly synchronized. This means you may cause data races by both
+reading and writing a resource region in a compute pass, or by writing
+multiple times to a resource region. If your compute work depends on
+reading the completed output from a previous dispatch, you MUST end the
+current compute pass and begin a new one before you can safely access the
+data. Otherwise you will receive unexpected results. Reading and writing a
+texture in the same compute pass is only supported by specific texture
+formats. Make sure you check the format support!</p>
+<h4 id="parameters"><a class="doc-anchor" href="#parameters">§</a>Parameters</h4>
+<ul>
+<li><code>command_buffer</code>: a command buffer.</li>
+<li><code>storage_texture_bindings</code>: an array of writeable storage texture
+binding structs.</li>
+<li><code>num_storage_texture_bindings</code>: the number of storage textures to bind
+from the array.</li>
+<li><code>storage_buffer_bindings</code>: an array of writeable storage buffer binding
+structs.</li>
+<li><code>num_storage_buffer_bindings</code>: the number of storage buffers to bind
+from the array.</li>
+</ul>
+<h4 id="return-value"><a class="doc-anchor" href="#return-value">§</a>Return value</h4>
+<p>Returns a compute pass handle.</p>
+<h4 id="availability"><a class="doc-anchor" href="#availability">§</a>Availability</h4>
+<p>This function is available since SDL 3.2.0.</p>
+<h4 id="see-also"><a class="doc-anchor" href="#see-also">§</a>See also</h4>
+<ul>
+<li><a href="fn.SDL_EndGPUComputePass.html" title="fn sdl3_sys::gpu::SDL_EndGPUComputePass"><code>SDL_EndGPUComputePass</code></a></li>
+</ul>
+</div></details></section></div></main></body></html>

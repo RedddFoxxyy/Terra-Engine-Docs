@@ -1,0 +1,57 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Create a 2D rendering context for a window, with the specified properties."><title>SDL_CreateRendererWithProperties in sdl3_sys::render - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../static.files/rustdoc-46132b98.css"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="sdl3_sys" data-themes="" data-resource-suffix="" data-rustdoc-version="1.85.0 (4d91de4e4 2025-02-17)" data-channel="1.85.0" data-search-js="search-75f5ac3e.js" data-settings-js="settings-0f613d39.js" ><script src="../../static.files/storage-59e33391.js"></script><script defer src="sidebar-items.js"></script><script defer src="../../static.files/main-5f194d8c.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-893ab5e7.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-6580c154.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg"></head><body class="rustdoc fn"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../../sdl3_sys/index.html">sdl3_<wbr>sys</a><span class="version">0.4.4+SDL3-3.2.4</span></h2></div><div class="sidebar-elems"><section id="rustdoc-toc"><h2 class="location"><a href="#">SDL_<wbr>Create<wbr>Renderer<wbr>With<wbr>Properties</a></h2><h3><a href="#">Sections</a></h3><ul class="block top-toc"><li><a href="#parameters" title="Parameters">Parameters</a></li><li><a href="#return-value" title="Return value">Return value</a></li><li><a href="#thread-safety" title="Thread safety">Thread safety</a></li><li><a href="#availability" title="Availability">Availability</a></li><li><a href="#see-also" title="See also">See also</a></li></ul></section><div id="rustdoc-modnav"><h2><a href="index.html">In sdl3_<wbr>sys::<wbr>render</a></h2></div></div></nav><div class="sidebar-resizer"></div><main><div class="width-limiter"><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><span class="rustdoc-breadcrumbs"><a href="../index.html">sdl3_sys</a>::<wbr><a href="index.html">render</a></span><h1>Function <span class="fn">SDL_CreateRendererWithProperties</span><button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"><a class="src" href="../../src/sdl3_sys/generated/render.rs.html#400">Source</a> </span></div><pre class="rust item-decl"><code>pub unsafe extern &quot;C&quot; fn SDL_CreateRendererWithProperties(
+    props: <a class="type" href="../properties/type.SDL_PropertiesID.html" title="type sdl3_sys::properties::SDL_PropertiesID">SDL_PropertiesID</a>,
+) -&gt; <a class="primitive" href="https://doc.rust-lang.org/1.85.0/core/primitive.pointer.html">*mut </a><a class="struct" href="struct.SDL_Renderer.html" title="struct sdl3_sys::render::SDL_Renderer">SDL_Renderer</a></code></pre><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Create a 2D rendering context for a window, with the specified properties.</p>
+<p>These are the supported properties:</p>
+<ul>
+<li><a href="constant.SDL_PROP_RENDERER_CREATE_NAME_STRING.html" title="constant sdl3_sys::render::SDL_PROP_RENDERER_CREATE_NAME_STRING"><code>SDL_PROP_RENDERER_CREATE_NAME_STRING</code></a>: the name of the rendering driver
+to use, if a specific one is desired</li>
+<li><a href="constant.SDL_PROP_RENDERER_CREATE_WINDOW_POINTER.html" title="constant sdl3_sys::render::SDL_PROP_RENDERER_CREATE_WINDOW_POINTER"><code>SDL_PROP_RENDERER_CREATE_WINDOW_POINTER</code></a>: the window where rendering is
+displayed, required if this isn’t a software renderer using a surface</li>
+<li><a href="constant.SDL_PROP_RENDERER_CREATE_SURFACE_POINTER.html" title="constant sdl3_sys::render::SDL_PROP_RENDERER_CREATE_SURFACE_POINTER"><code>SDL_PROP_RENDERER_CREATE_SURFACE_POINTER</code></a>: the surface where rendering
+is displayed, if you want a software renderer without a window</li>
+<li><a href="constant.SDL_PROP_RENDERER_CREATE_OUTPUT_COLORSPACE_NUMBER.html" title="constant sdl3_sys::render::SDL_PROP_RENDERER_CREATE_OUTPUT_COLORSPACE_NUMBER"><code>SDL_PROP_RENDERER_CREATE_OUTPUT_COLORSPACE_NUMBER</code></a>: an <a href="../pixels/struct.SDL_Colorspace.html" title="struct sdl3_sys::pixels::SDL_Colorspace"><code>SDL_Colorspace</code></a>
+value describing the colorspace for output to the display, defaults to
+<a href="../pixels/constant.SDL_COLORSPACE_SRGB.html" title="constant sdl3_sys::pixels::SDL_COLORSPACE_SRGB"><code>SDL_COLORSPACE_SRGB</code></a>. The direct3d11, direct3d12, and metal renderers
+support <a href="../pixels/constant.SDL_COLORSPACE_SRGB_LINEAR.html" title="constant sdl3_sys::pixels::SDL_COLORSPACE_SRGB_LINEAR"><code>SDL_COLORSPACE_SRGB_LINEAR</code></a>, which is a linear color space and
+supports HDR output. If you select <a href="../pixels/constant.SDL_COLORSPACE_SRGB_LINEAR.html" title="constant sdl3_sys::pixels::SDL_COLORSPACE_SRGB_LINEAR"><code>SDL_COLORSPACE_SRGB_LINEAR</code></a>, drawing
+still uses the sRGB colorspace, but values can go beyond 1.0 and float
+(linear) format textures can be used for HDR content.</li>
+<li><a href="constant.SDL_PROP_RENDERER_CREATE_PRESENT_VSYNC_NUMBER.html" title="constant sdl3_sys::render::SDL_PROP_RENDERER_CREATE_PRESENT_VSYNC_NUMBER"><code>SDL_PROP_RENDERER_CREATE_PRESENT_VSYNC_NUMBER</code></a>: non-zero if you want
+present synchronized with the refresh rate. This property can take any
+value that is supported by <a href="fn.SDL_SetRenderVSync.html" title="fn sdl3_sys::render::SDL_SetRenderVSync"><code>SDL_SetRenderVSync()</code></a> for the renderer.</li>
+</ul>
+<p>With the vulkan renderer:</p>
+<ul>
+<li><a href="constant.SDL_PROP_RENDERER_CREATE_VULKAN_INSTANCE_POINTER.html" title="constant sdl3_sys::render::SDL_PROP_RENDERER_CREATE_VULKAN_INSTANCE_POINTER"><code>SDL_PROP_RENDERER_CREATE_VULKAN_INSTANCE_POINTER</code></a>: the VkInstance to use
+with the renderer, optional.</li>
+<li><a href="constant.SDL_PROP_RENDERER_CREATE_VULKAN_SURFACE_NUMBER.html" title="constant sdl3_sys::render::SDL_PROP_RENDERER_CREATE_VULKAN_SURFACE_NUMBER"><code>SDL_PROP_RENDERER_CREATE_VULKAN_SURFACE_NUMBER</code></a>: the VkSurfaceKHR to use
+with the renderer, optional.</li>
+<li><a href="constant.SDL_PROP_RENDERER_CREATE_VULKAN_PHYSICAL_DEVICE_POINTER.html" title="constant sdl3_sys::render::SDL_PROP_RENDERER_CREATE_VULKAN_PHYSICAL_DEVICE_POINTER"><code>SDL_PROP_RENDERER_CREATE_VULKAN_PHYSICAL_DEVICE_POINTER</code></a>: the
+VkPhysicalDevice to use with the renderer, optional.</li>
+<li><a href="constant.SDL_PROP_RENDERER_CREATE_VULKAN_DEVICE_POINTER.html" title="constant sdl3_sys::render::SDL_PROP_RENDERER_CREATE_VULKAN_DEVICE_POINTER"><code>SDL_PROP_RENDERER_CREATE_VULKAN_DEVICE_POINTER</code></a>: the VkDevice to use
+with the renderer, optional.</li>
+<li><a href="constant.SDL_PROP_RENDERER_CREATE_VULKAN_GRAPHICS_QUEUE_FAMILY_INDEX_NUMBER.html" title="constant sdl3_sys::render::SDL_PROP_RENDERER_CREATE_VULKAN_GRAPHICS_QUEUE_FAMILY_INDEX_NUMBER"><code>SDL_PROP_RENDERER_CREATE_VULKAN_GRAPHICS_QUEUE_FAMILY_INDEX_NUMBER</code></a>: the
+queue family index used for rendering.</li>
+<li><a href="constant.SDL_PROP_RENDERER_CREATE_VULKAN_PRESENT_QUEUE_FAMILY_INDEX_NUMBER.html" title="constant sdl3_sys::render::SDL_PROP_RENDERER_CREATE_VULKAN_PRESENT_QUEUE_FAMILY_INDEX_NUMBER"><code>SDL_PROP_RENDERER_CREATE_VULKAN_PRESENT_QUEUE_FAMILY_INDEX_NUMBER</code></a>: the
+queue family index used for presentation.</li>
+</ul>
+<h4 id="parameters"><a class="doc-anchor" href="#parameters">§</a>Parameters</h4>
+<ul>
+<li><code>props</code>: the properties to use.</li>
+</ul>
+<h4 id="return-value"><a class="doc-anchor" href="#return-value">§</a>Return value</h4>
+<p>Returns a valid rendering context or NULL if there was an error; call
+<a href="../error/fn.SDL_GetError.html" title="fn sdl3_sys::error::SDL_GetError"><code>SDL_GetError()</code></a> for more information.</p>
+<h4 id="thread-safety"><a class="doc-anchor" href="#thread-safety">§</a>Thread safety</h4>
+<p>This function should only be called on the main thread.</p>
+<h4 id="availability"><a class="doc-anchor" href="#availability">§</a>Availability</h4>
+<p>This function is available since SDL 3.2.0.</p>
+<h4 id="see-also"><a class="doc-anchor" href="#see-also">§</a>See also</h4>
+<ul>
+<li><a href="../properties/fn.SDL_CreateProperties.html" title="fn sdl3_sys::properties::SDL_CreateProperties"><code>SDL_CreateProperties</code></a></li>
+<li><a href="fn.SDL_CreateRenderer.html" title="fn sdl3_sys::render::SDL_CreateRenderer"><code>SDL_CreateRenderer</code></a></li>
+<li><a href="fn.SDL_CreateSoftwareRenderer.html" title="fn sdl3_sys::render::SDL_CreateSoftwareRenderer"><code>SDL_CreateSoftwareRenderer</code></a></li>
+<li><a href="fn.SDL_DestroyRenderer.html" title="fn sdl3_sys::render::SDL_DestroyRenderer"><code>SDL_DestroyRenderer</code></a></li>
+<li><a href="fn.SDL_GetRendererName.html" title="fn sdl3_sys::render::SDL_GetRendererName"><code>SDL_GetRendererName</code></a></li>
+</ul>
+</div></details></section></div></main></body></html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Create a window with the specified dimensions and flags."><title>SDL_CreateWindow in sdl3_sys::video - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../static.files/rustdoc-46132b98.css"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="sdl3_sys" data-themes="" data-resource-suffix="" data-rustdoc-version="1.85.0 (4d91de4e4 2025-02-17)" data-channel="1.85.0" data-search-js="search-75f5ac3e.js" data-settings-js="settings-0f613d39.js" ><script src="../../static.files/storage-59e33391.js"></script><script defer src="sidebar-items.js"></script><script defer src="../../static.files/main-5f194d8c.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-893ab5e7.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-6580c154.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg"></head><body class="rustdoc fn"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../../sdl3_sys/index.html">sdl3_<wbr>sys</a><span class="version">0.4.4+SDL3-3.2.4</span></h2></div><div class="sidebar-elems"><section id="rustdoc-toc"><h2 class="location"><a href="#">SDL_<wbr>Create<wbr>Window</a></h2><h3><a href="#">Sections</a></h3><ul class="block top-toc"><li><a href="#parameters" title="Parameters">Parameters</a></li><li><a href="#return-value" title="Return value">Return value</a></li><li><a href="#thread-safety" title="Thread safety">Thread safety</a></li><li><a href="#availability" title="Availability">Availability</a></li><li><a href="#see-also" title="See also">See also</a></li></ul></section><div id="rustdoc-modnav"><h2><a href="index.html">In sdl3_<wbr>sys::<wbr>video</a></h2></div></div></nav><div class="sidebar-resizer"></div><main><div class="width-limiter"><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><span class="rustdoc-breadcrumbs"><a href="../index.html">sdl3_sys</a>::<wbr><a href="index.html">video</a></span><h1>Function <span class="fn">SDL_CreateWindow</span><button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"><a class="src" href="../../src/sdl3_sys/generated/video.rs.html#1671-1676">Source</a> </span></div><pre class="rust item-decl"><code>pub unsafe extern &quot;C&quot; fn SDL_CreateWindow(
+    title: <a class="primitive" href="https://doc.rust-lang.org/1.85.0/core/primitive.pointer.html">*const </a><a class="type" href="https://doc.rust-lang.org/1.85.0/core/ffi/type.c_char.html" title="type core::ffi::c_char">c_char</a>,
+    w: <a class="type" href="https://doc.rust-lang.org/1.85.0/core/ffi/type.c_int.html" title="type core::ffi::c_int">c_int</a>,
+    h: <a class="type" href="https://doc.rust-lang.org/1.85.0/core/ffi/type.c_int.html" title="type core::ffi::c_int">c_int</a>,
+    flags: <a class="type" href="type.SDL_WindowFlags.html" title="type sdl3_sys::video::SDL_WindowFlags">SDL_WindowFlags</a>,
+) -&gt; <a class="primitive" href="https://doc.rust-lang.org/1.85.0/core/primitive.pointer.html">*mut </a><a class="struct" href="struct.SDL_Window.html" title="struct sdl3_sys::video::SDL_Window">SDL_Window</a></code></pre><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Create a window with the specified dimensions and flags.</p>
+<p><code>flags</code> may be any of the following OR’d together:</p>
+<ul>
+<li><a href="constant.SDL_WINDOW_FULLSCREEN.html" title="constant sdl3_sys::video::SDL_WINDOW_FULLSCREEN"><code>SDL_WINDOW_FULLSCREEN</code></a>: fullscreen window at desktop resolution</li>
+<li><a href="constant.SDL_WINDOW_OPENGL.html" title="constant sdl3_sys::video::SDL_WINDOW_OPENGL"><code>SDL_WINDOW_OPENGL</code></a>: window usable with an OpenGL context</li>
+<li><a href="constant.SDL_WINDOW_OCCLUDED.html" title="constant sdl3_sys::video::SDL_WINDOW_OCCLUDED"><code>SDL_WINDOW_OCCLUDED</code></a>: window partially or completely obscured by another
+window</li>
+<li><a href="constant.SDL_WINDOW_HIDDEN.html" title="constant sdl3_sys::video::SDL_WINDOW_HIDDEN"><code>SDL_WINDOW_HIDDEN</code></a>: window is not visible</li>
+<li><a href="constant.SDL_WINDOW_BORDERLESS.html" title="constant sdl3_sys::video::SDL_WINDOW_BORDERLESS"><code>SDL_WINDOW_BORDERLESS</code></a>: no window decoration</li>
+<li><a href="constant.SDL_WINDOW_RESIZABLE.html" title="constant sdl3_sys::video::SDL_WINDOW_RESIZABLE"><code>SDL_WINDOW_RESIZABLE</code></a>: window can be resized</li>
+<li><a href="constant.SDL_WINDOW_MINIMIZED.html" title="constant sdl3_sys::video::SDL_WINDOW_MINIMIZED"><code>SDL_WINDOW_MINIMIZED</code></a>: window is minimized</li>
+<li><a href="constant.SDL_WINDOW_MAXIMIZED.html" title="constant sdl3_sys::video::SDL_WINDOW_MAXIMIZED"><code>SDL_WINDOW_MAXIMIZED</code></a>: window is maximized</li>
+<li><a href="constant.SDL_WINDOW_MOUSE_GRABBED.html" title="constant sdl3_sys::video::SDL_WINDOW_MOUSE_GRABBED"><code>SDL_WINDOW_MOUSE_GRABBED</code></a>: window has grabbed mouse focus</li>
+<li><a href="constant.SDL_WINDOW_INPUT_FOCUS.html" title="constant sdl3_sys::video::SDL_WINDOW_INPUT_FOCUS"><code>SDL_WINDOW_INPUT_FOCUS</code></a>: window has input focus</li>
+<li><a href="constant.SDL_WINDOW_MOUSE_FOCUS.html" title="constant sdl3_sys::video::SDL_WINDOW_MOUSE_FOCUS"><code>SDL_WINDOW_MOUSE_FOCUS</code></a>: window has mouse focus</li>
+<li><a href="constant.SDL_WINDOW_EXTERNAL.html" title="constant sdl3_sys::video::SDL_WINDOW_EXTERNAL"><code>SDL_WINDOW_EXTERNAL</code></a>: window not created by SDL</li>
+<li><a href="constant.SDL_WINDOW_MODAL.html" title="constant sdl3_sys::video::SDL_WINDOW_MODAL"><code>SDL_WINDOW_MODAL</code></a>: window is modal</li>
+<li><a href="constant.SDL_WINDOW_HIGH_PIXEL_DENSITY.html" title="constant sdl3_sys::video::SDL_WINDOW_HIGH_PIXEL_DENSITY"><code>SDL_WINDOW_HIGH_PIXEL_DENSITY</code></a>: window uses high pixel density back
+buffer if possible</li>
+<li><a href="constant.SDL_WINDOW_MOUSE_CAPTURE.html" title="constant sdl3_sys::video::SDL_WINDOW_MOUSE_CAPTURE"><code>SDL_WINDOW_MOUSE_CAPTURE</code></a>: window has mouse captured (unrelated to
+MOUSE_GRABBED)</li>
+<li><a href="constant.SDL_WINDOW_ALWAYS_ON_TOP.html" title="constant sdl3_sys::video::SDL_WINDOW_ALWAYS_ON_TOP"><code>SDL_WINDOW_ALWAYS_ON_TOP</code></a>: window should always be above others</li>
+<li><a href="constant.SDL_WINDOW_UTILITY.html" title="constant sdl3_sys::video::SDL_WINDOW_UTILITY"><code>SDL_WINDOW_UTILITY</code></a>: window should be treated as a utility window, not
+showing in the task bar and window list</li>
+<li><a href="constant.SDL_WINDOW_TOOLTIP.html" title="constant sdl3_sys::video::SDL_WINDOW_TOOLTIP"><code>SDL_WINDOW_TOOLTIP</code></a>: window should be treated as a tooltip and does not
+get mouse or keyboard focus, requires a parent window</li>
+<li><a href="constant.SDL_WINDOW_POPUP_MENU.html" title="constant sdl3_sys::video::SDL_WINDOW_POPUP_MENU"><code>SDL_WINDOW_POPUP_MENU</code></a>: window should be treated as a popup menu,
+requires a parent window</li>
+<li><a href="constant.SDL_WINDOW_KEYBOARD_GRABBED.html" title="constant sdl3_sys::video::SDL_WINDOW_KEYBOARD_GRABBED"><code>SDL_WINDOW_KEYBOARD_GRABBED</code></a>: window has grabbed keyboard input</li>
+<li><a href="constant.SDL_WINDOW_VULKAN.html" title="constant sdl3_sys::video::SDL_WINDOW_VULKAN"><code>SDL_WINDOW_VULKAN</code></a>: window usable with a Vulkan instance</li>
+<li><a href="constant.SDL_WINDOW_METAL.html" title="constant sdl3_sys::video::SDL_WINDOW_METAL"><code>SDL_WINDOW_METAL</code></a>: window usable with a Metal instance</li>
+<li><a href="constant.SDL_WINDOW_TRANSPARENT.html" title="constant sdl3_sys::video::SDL_WINDOW_TRANSPARENT"><code>SDL_WINDOW_TRANSPARENT</code></a>: window with transparent buffer</li>
+<li><a href="constant.SDL_WINDOW_NOT_FOCUSABLE.html" title="constant sdl3_sys::video::SDL_WINDOW_NOT_FOCUSABLE"><code>SDL_WINDOW_NOT_FOCUSABLE</code></a>: window should not be focusable</li>
+</ul>
+<p>The <a href="struct.SDL_Window.html" title="struct sdl3_sys::video::SDL_Window"><code>SDL_Window</code></a> is implicitly shown if <a href="constant.SDL_WINDOW_HIDDEN.html" title="constant sdl3_sys::video::SDL_WINDOW_HIDDEN"><code>SDL_WINDOW_HIDDEN</code></a> is not set.</p>
+<p>On Apple’s macOS, you <strong>must</strong> set the NSHighResolutionCapable Info.plist
+property to YES, otherwise you will not receive a High-DPI OpenGL canvas.</p>
+<p>The window pixel size may differ from its window coordinate size if the
+window is on a high pixel density display. Use <a href="fn.SDL_GetWindowSize.html" title="fn sdl3_sys::video::SDL_GetWindowSize"><code>SDL_GetWindowSize()</code></a> to query
+the client area’s size in window coordinates, and
+<a href="fn.SDL_GetWindowSizeInPixels.html" title="fn sdl3_sys::video::SDL_GetWindowSizeInPixels"><code>SDL_GetWindowSizeInPixels()</code></a> or <a href="../render/fn.SDL_GetRenderOutputSize.html" title="fn sdl3_sys::render::SDL_GetRenderOutputSize"><code>SDL_GetRenderOutputSize()</code></a> to query the
+drawable size in pixels. Note that the drawable size can vary after the
+window is created and should be queried again if you get an
+<a href="../events/constant.SDL_EVENT_WINDOW_PIXEL_SIZE_CHANGED.html" title="constant sdl3_sys::events::SDL_EVENT_WINDOW_PIXEL_SIZE_CHANGED"><code>SDL_EVENT_WINDOW_PIXEL_SIZE_CHANGED</code></a> event.</p>
+<p>If the window is created with any of the <a href="constant.SDL_WINDOW_OPENGL.html" title="constant sdl3_sys::video::SDL_WINDOW_OPENGL"><code>SDL_WINDOW_OPENGL</code></a> or
+<a href="constant.SDL_WINDOW_VULKAN.html" title="constant sdl3_sys::video::SDL_WINDOW_VULKAN"><code>SDL_WINDOW_VULKAN</code></a> flags, then the corresponding LoadLibrary function
+(<a href="fn.SDL_GL_LoadLibrary.html" title="fn sdl3_sys::video::SDL_GL_LoadLibrary"><code>SDL_GL_LoadLibrary</code></a> or <a href="../vulkan/fn.SDL_Vulkan_LoadLibrary.html" title="fn sdl3_sys::vulkan::SDL_Vulkan_LoadLibrary"><code>SDL_Vulkan_LoadLibrary</code></a>) is called and the
+corresponding UnloadLibrary function is called by <a href="fn.SDL_DestroyWindow.html" title="fn sdl3_sys::video::SDL_DestroyWindow"><code>SDL_DestroyWindow()</code></a>.</p>
+<p>If <a href="constant.SDL_WINDOW_VULKAN.html" title="constant sdl3_sys::video::SDL_WINDOW_VULKAN"><code>SDL_WINDOW_VULKAN</code></a> is specified and there isn’t a working Vulkan driver,
+<a href="fn.SDL_CreateWindow.html" title="fn sdl3_sys::video::SDL_CreateWindow"><code>SDL_CreateWindow()</code></a> will fail, because <a href="../vulkan/fn.SDL_Vulkan_LoadLibrary.html" title="fn sdl3_sys::vulkan::SDL_Vulkan_LoadLibrary"><code>SDL_Vulkan_LoadLibrary()</code></a> will fail.</p>
+<p>If <a href="constant.SDL_WINDOW_METAL.html" title="constant sdl3_sys::video::SDL_WINDOW_METAL"><code>SDL_WINDOW_METAL</code></a> is specified on an OS that does not support Metal,
+<a href="fn.SDL_CreateWindow.html" title="fn sdl3_sys::video::SDL_CreateWindow"><code>SDL_CreateWindow()</code></a> will fail.</p>
+<p>If you intend to use this window with an <a href="../render/struct.SDL_Renderer.html" title="struct sdl3_sys::render::SDL_Renderer"><code>SDL_Renderer</code></a>, you should use
+<a href="../render/fn.SDL_CreateWindowAndRenderer.html" title="fn sdl3_sys::render::SDL_CreateWindowAndRenderer"><code>SDL_CreateWindowAndRenderer()</code></a> instead of this function, to avoid window
+flicker.</p>
+<p>On non-Apple devices, SDL requires you to either not link to the Vulkan
+loader or link to a dynamic library version. This limitation may be removed
+in a future version of SDL.</p>
+<h4 id="parameters"><a class="doc-anchor" href="#parameters">§</a>Parameters</h4>
+<ul>
+<li><code>title</code>: the title of the window, in UTF-8 encoding.</li>
+<li><code>w</code>: the width of the window.</li>
+<li><code>h</code>: the height of the window.</li>
+<li><code>flags</code>: 0, or one or more <a href="type.SDL_WindowFlags.html" title="type sdl3_sys::video::SDL_WindowFlags"><code>SDL_WindowFlags</code></a> OR’d together.</li>
+</ul>
+<h4 id="return-value"><a class="doc-anchor" href="#return-value">§</a>Return value</h4>
+<p>Returns the window that was created or NULL on failure; call
+<a href="../error/fn.SDL_GetError.html" title="fn sdl3_sys::error::SDL_GetError"><code>SDL_GetError()</code></a> for more information.</p>
+<h4 id="thread-safety"><a class="doc-anchor" href="#thread-safety">§</a>Thread safety</h4>
+<p>This function should only be called on the main thread.</p>
+<h4 id="availability"><a class="doc-anchor" href="#availability">§</a>Availability</h4>
+<p>This function is available since SDL 3.2.0.</p>
+<h4 id="see-also"><a class="doc-anchor" href="#see-also">§</a>See also</h4>
+<ul>
+<li><a href="../render/fn.SDL_CreateWindowAndRenderer.html" title="fn sdl3_sys::render::SDL_CreateWindowAndRenderer"><code>SDL_CreateWindowAndRenderer</code></a></li>
+<li><a href="fn.SDL_CreatePopupWindow.html" title="fn sdl3_sys::video::SDL_CreatePopupWindow"><code>SDL_CreatePopupWindow</code></a></li>
+<li><a href="fn.SDL_CreateWindowWithProperties.html" title="fn sdl3_sys::video::SDL_CreateWindowWithProperties"><code>SDL_CreateWindowWithProperties</code></a></li>
+<li><a href="fn.SDL_DestroyWindow.html" title="fn sdl3_sys::video::SDL_DestroyWindow"><code>SDL_DestroyWindow</code></a></li>
+</ul>
+</div></details></section></div></main></body></html>

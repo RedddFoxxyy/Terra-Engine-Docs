@@ -1,0 +1,57 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Set the current input channel map of an audio stream."><title>SDL_SetAudioStreamInputChannelMap in sdl3_sys::audio - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../static.files/rustdoc-46132b98.css"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="sdl3_sys" data-themes="" data-resource-suffix="" data-rustdoc-version="1.85.0 (4d91de4e4 2025-02-17)" data-channel="1.85.0" data-search-js="search-75f5ac3e.js" data-settings-js="settings-0f613d39.js" ><script src="../../static.files/storage-59e33391.js"></script><script defer src="sidebar-items.js"></script><script defer src="../../static.files/main-5f194d8c.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-893ab5e7.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-6580c154.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg"></head><body class="rustdoc fn"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../../sdl3_sys/index.html">sdl3_<wbr>sys</a><span class="version">0.4.4+SDL3-3.2.4</span></h2></div><div class="sidebar-elems"><section id="rustdoc-toc"><h2 class="location"><a href="#">SDL_<wbr>SetAudio<wbr>Stream<wbr>Input<wbr>Channel<wbr>Map</a></h2><h3><a href="#">Sections</a></h3><ul class="block top-toc"><li><a href="#parameters" title="Parameters">Parameters</a></li><li><a href="#return-value" title="Return value">Return value</a></li><li><a href="#thread-safety" title="Thread safety">Thread safety</a></li><li><a href="#availability" title="Availability">Availability</a></li><li><a href="#see-also" title="See also">See also</a></li></ul></section><div id="rustdoc-modnav"><h2><a href="index.html">In sdl3_<wbr>sys::<wbr>audio</a></h2></div></div></nav><div class="sidebar-resizer"></div><main><div class="width-limiter"><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><span class="rustdoc-breadcrumbs"><a href="../index.html">sdl3_sys</a>::<wbr><a href="index.html">audio</a></span><h1>Function <span class="fn">SDL_SetAudioStreamInputChannelMap</span><button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"><a class="src" href="../../src/sdl3_sys/generated/audio.rs.html#1663-1667">Source</a> </span></div><pre class="rust item-decl"><code>pub unsafe extern &quot;C&quot; fn SDL_SetAudioStreamInputChannelMap(
+    stream: <a class="primitive" href="https://doc.rust-lang.org/1.85.0/core/primitive.pointer.html">*mut </a><a class="struct" href="struct.SDL_AudioStream.html" title="struct sdl3_sys::audio::SDL_AudioStream">SDL_AudioStream</a>,
+    chmap: <a class="primitive" href="https://doc.rust-lang.org/1.85.0/core/primitive.pointer.html">*const </a><a class="type" href="https://doc.rust-lang.org/1.85.0/core/ffi/type.c_int.html" title="type core::ffi::c_int">c_int</a>,
+    count: <a class="type" href="https://doc.rust-lang.org/1.85.0/core/ffi/type.c_int.html" title="type core::ffi::c_int">c_int</a>,
+) -&gt; <a class="primitive" href="https://doc.rust-lang.org/1.85.0/core/primitive.bool.html">bool</a></code></pre><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Set the current input channel map of an audio stream.</p>
+<p>Channel maps are optional; most things do not need them, instead passing
+data in the <a href="CategoryAudio#channel-layouts">order that SDL expects</a>.</p>
+<p>The input channel map reorders data that is added to a stream via
+<a href="fn.SDL_PutAudioStreamData.html" title="fn sdl3_sys::audio::SDL_PutAudioStreamData"><code>SDL_PutAudioStreamData</code></a>. Future calls to <a href="fn.SDL_PutAudioStreamData.html" title="fn sdl3_sys::audio::SDL_PutAudioStreamData"><code>SDL_PutAudioStreamData</code></a> must provide
+data in the new channel order.</p>
+<p>Each item in the array represents an input channel, and its value is the
+channel that it should be remapped to. To reverse a stereo signal’s left
+and right values, you’d have an array of <code>{ 1, 0 }</code>. It is legal to remap
+multiple channels to the same thing, so <code>{ 1, 1 }</code> would duplicate the
+right channel to both channels of a stereo signal. An element in the
+channel map set to -1 instead of a valid channel will mute that channel,
+setting it to a silence value.</p>
+<p>You cannot change the number of channels through a channel map, just
+reorder/mute them.</p>
+<p>Data that was previously queued in the stream will still be operated on in
+the order that was current when it was added, which is to say you can put
+the end of a sound file in one order to a stream, change orders for the
+next sound file, and start putting that new data while the previous sound
+file is still queued, and everything will still play back correctly.</p>
+<p>Audio streams default to no remapping applied. Passing a NULL channel map
+is legal, and turns off remapping.</p>
+<p>SDL will copy the channel map; the caller does not have to save this array
+after this call.</p>
+<p>If <code>count</code> is not equal to the current number of channels in the audio
+stream’s format, this will fail. This is a safety measure to make sure a
+race condition hasn’t changed the format while this call is setting the
+channel map.</p>
+<p>Unlike attempting to change the stream’s format, the input channel map on a
+stream bound to a recording device is permitted to change at any time; any
+data added to the stream from the device after this call will have the new
+mapping, but previously-added data will still have the prior mapping.</p>
+<h4 id="parameters"><a class="doc-anchor" href="#parameters">§</a>Parameters</h4>
+<ul>
+<li><code>stream</code>: the <a href="struct.SDL_AudioStream.html" title="struct sdl3_sys::audio::SDL_AudioStream"><code>SDL_AudioStream</code></a> to change.</li>
+<li><code>chmap</code>: the new channel map, NULL to reset to default.</li>
+<li><code>count</code>: The number of channels in the map.</li>
+</ul>
+<h4 id="return-value"><a class="doc-anchor" href="#return-value">§</a>Return value</h4>
+<p>Returns true on success or false on failure; call <a href="../error/fn.SDL_GetError.html" title="fn sdl3_sys::error::SDL_GetError"><code>SDL_GetError()</code></a> for more
+information.</p>
+<h4 id="thread-safety"><a class="doc-anchor" href="#thread-safety">§</a>Thread safety</h4>
+<p>It is safe to call this function from any thread, as it holds
+a stream-specific mutex while running. Don’t change the
+stream’s format to have a different number of channels from a
+a different thread at the same time, though!</p>
+<h4 id="availability"><a class="doc-anchor" href="#availability">§</a>Availability</h4>
+<p>This function is available since SDL 3.2.0.</p>
+<h4 id="see-also"><a class="doc-anchor" href="#see-also">§</a>See also</h4>
+<ul>
+<li><a href="fn.SDL_SetAudioStreamInputChannelMap.html" title="fn sdl3_sys::audio::SDL_SetAudioStreamInputChannelMap"><code>SDL_SetAudioStreamInputChannelMap</code></a></li>
+</ul>
+</div></details></section></div></main></body></html>

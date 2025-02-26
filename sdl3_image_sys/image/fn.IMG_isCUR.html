@@ -1,0 +1,41 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Detect CUR image data on a readable/seekable `SDL_IOStream`."><title>IMG_isCUR in sdl3_image_sys::image - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../static.files/rustdoc-46132b98.css"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="sdl3_image_sys" data-themes="" data-resource-suffix="" data-rustdoc-version="1.85.0 (4d91de4e4 2025-02-17)" data-channel="1.85.0" data-search-js="search-75f5ac3e.js" data-settings-js="settings-0f613d39.js" ><script src="../../static.files/storage-59e33391.js"></script><script defer src="sidebar-items.js"></script><script defer src="../../static.files/main-5f194d8c.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-893ab5e7.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-6580c154.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg"></head><body class="rustdoc fn"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../../sdl3_image_sys/index.html">sdl3_<wbr>image_<wbr>sys</a><span class="version">0.1.0</span></h2></div><div class="sidebar-elems"><section id="rustdoc-toc"><h2 class="location"><a href="#">IMG_<wbr>isCUR</a></h2><h3><a href="#">Sections</a></h3><ul class="block top-toc"><li><a href="#parameters" title="Parameters">Parameters</a></li><li><a href="#return-value" title="Return value">Return value</a></li><li><a href="#availability" title="Availability">Availability</a></li><li><a href="#see-also" title="See also">See also</a></li></ul></section><div id="rustdoc-modnav"><h2><a href="index.html">In sdl3_<wbr>image_<wbr>sys::<wbr>image</a></h2></div></div></nav><div class="sidebar-resizer"></div><main><div class="width-limiter"><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><span class="rustdoc-breadcrumbs"><a href="../index.html">sdl3_image_sys</a>::<wbr><a href="index.html">image</a></span><h1>Function <span class="fn">IMG_isCUR</span><button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"><a class="src" href="../../src/sdl3_image_sys/generated/image.rs.html#534">Source</a> </span></div><pre class="rust item-decl"><code>pub unsafe extern &quot;C&quot; fn IMG_isCUR(src: <a class="primitive" href="https://doc.rust-lang.org/1.85.0/core/primitive.pointer.html">*mut </a><a class="struct" href="../../sdl3_sys/generated/iostream/struct.SDL_IOStream.html" title="struct sdl3_sys::generated::iostream::SDL_IOStream">SDL_IOStream</a>) -&gt; <a class="primitive" href="https://doc.rust-lang.org/1.85.0/core/primitive.bool.html">bool</a></code></pre><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Detect CUR image data on a readable/seekable <a href="../../sdl3_sys/generated/iostream/struct.SDL_IOStream.html" title="struct sdl3_sys::generated::iostream::SDL_IOStream"><code>SDL_IOStream</code></a>.</p>
+<p>This function attempts to determine if a file is a given filetype, reading
+the least amount possible from the <a href="../../sdl3_sys/generated/iostream/struct.SDL_IOStream.html" title="struct sdl3_sys::generated::iostream::SDL_IOStream"><code>SDL_IOStream</code></a> (usually a few bytes).</p>
+<p>There is no distinction made between “not the filetype in question” and
+basic i/o errors.</p>
+<p>This function will always attempt to seek <code>src</code> back to where it started
+when this function was called, but it will not report any errors in doing
+so, but assuming seeking works, this means you can immediately use this
+with a different IMG_isTYPE function, or load the image without further
+seeking.</p>
+<p>You do not need to call this function to load data; SDL_image can work to
+determine file type in many cases in its standard load functions.</p>
+<h4 id="parameters"><a class="doc-anchor" href="#parameters">§</a>Parameters</h4>
+<ul>
+<li><code>src</code>: a seekable/readable <a href="../../sdl3_sys/generated/iostream/struct.SDL_IOStream.html" title="struct sdl3_sys::generated::iostream::SDL_IOStream"><code>SDL_IOStream</code></a> to provide image data.</li>
+</ul>
+<h4 id="return-value"><a class="doc-anchor" href="#return-value">§</a>Return value</h4>
+<p>Returns non-zero if this is CUR data, zero otherwise.</p>
+<h4 id="availability"><a class="doc-anchor" href="#availability">§</a>Availability</h4>
+<p>This function is available since SDL_image 3.0.0.</p>
+<h4 id="see-also"><a class="doc-anchor" href="#see-also">§</a>See also</h4>
+<ul>
+<li><a href="fn.IMG_isAVIF.html" title="fn sdl3_image_sys::image::IMG_isAVIF"><code>IMG_isAVIF</code></a></li>
+<li><a href="fn.IMG_isICO.html" title="fn sdl3_image_sys::image::IMG_isICO"><code>IMG_isICO</code></a></li>
+<li><a href="fn.IMG_isBMP.html" title="fn sdl3_image_sys::image::IMG_isBMP"><code>IMG_isBMP</code></a></li>
+<li><a href="fn.IMG_isGIF.html" title="fn sdl3_image_sys::image::IMG_isGIF"><code>IMG_isGIF</code></a></li>
+<li><a href="fn.IMG_isJPG.html" title="fn sdl3_image_sys::image::IMG_isJPG"><code>IMG_isJPG</code></a></li>
+<li><a href="fn.IMG_isJXL.html" title="fn sdl3_image_sys::image::IMG_isJXL"><code>IMG_isJXL</code></a></li>
+<li><a href="fn.IMG_isLBM.html" title="fn sdl3_image_sys::image::IMG_isLBM"><code>IMG_isLBM</code></a></li>
+<li><a href="fn.IMG_isPCX.html" title="fn sdl3_image_sys::image::IMG_isPCX"><code>IMG_isPCX</code></a></li>
+<li><a href="fn.IMG_isPNG.html" title="fn sdl3_image_sys::image::IMG_isPNG"><code>IMG_isPNG</code></a></li>
+<li><a href="fn.IMG_isPNM.html" title="fn sdl3_image_sys::image::IMG_isPNM"><code>IMG_isPNM</code></a></li>
+<li><a href="fn.IMG_isSVG.html" title="fn sdl3_image_sys::image::IMG_isSVG"><code>IMG_isSVG</code></a></li>
+<li><a href="fn.IMG_isQOI.html" title="fn sdl3_image_sys::image::IMG_isQOI"><code>IMG_isQOI</code></a></li>
+<li><a href="fn.IMG_isTIF.html" title="fn sdl3_image_sys::image::IMG_isTIF"><code>IMG_isTIF</code></a></li>
+<li><a href="fn.IMG_isXCF.html" title="fn sdl3_image_sys::image::IMG_isXCF"><code>IMG_isXCF</code></a></li>
+<li><a href="fn.IMG_isXPM.html" title="fn sdl3_image_sys::image::IMG_isXPM"><code>IMG_isXPM</code></a></li>
+<li><a href="fn.IMG_isXV.html" title="fn sdl3_image_sys::image::IMG_isXV"><code>IMG_isXV</code></a></li>
+<li><a href="fn.IMG_isWEBP.html" title="fn sdl3_image_sys::image::IMG_isWEBP"><code>IMG_isWEBP</code></a></li>
+</ul>
+</div></details></section></div></main></body></html>

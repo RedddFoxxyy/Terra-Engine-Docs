@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["__pyfunction_tengine_place_img","tengine_place_img"]};

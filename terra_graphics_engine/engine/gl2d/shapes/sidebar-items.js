@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["__pyfunction_tengine_draw_circle","__pyfunction_tengine_draw_quarter_circle","__pyfunction_tengine_draw_rect","__pyfunction_tengine_draw_rounded_rect","register_shapes_module","tengine_draw_circle","tengine_draw_quarter_circle","tengine_draw_rect","tengine_draw_rounded_rect"]};

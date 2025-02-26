@@ -1,0 +1,9 @@
+(function() {
+    var implementors = Object.fromEntries([["image",[["impl&lt;R: <a class=\"trait\" href=\"https://doc.rust-lang.org/1.85.0/std/io/trait.Read.html\" title=\"trait std::io::Read\">Read</a> + <a class=\"trait\" href=\"https://doc.rust-lang.org/1.85.0/std/io/trait.Seek.html\" title=\"trait std::io::Seek\">Seek</a>&gt; <a class=\"trait\" href=\"https://doc.rust-lang.org/1.85.0/std/io/trait.Seek.html\" title=\"trait std::io::Seek\">Seek</a> for <a class=\"struct\" href=\"image/codecs/farbfeld/struct.FarbfeldReader.html\" title=\"struct image::codecs::farbfeld::FarbfeldReader\">FarbfeldReader</a>&lt;R&gt;"]]],["sdl3",[["impl <a class=\"trait\" href=\"https://doc.rust-lang.org/1.85.0/std/io/trait.Seek.html\" title=\"trait std::io::Seek\">Seek</a> for <a class=\"struct\" href=\"sdl3/iostream/struct.IOStream.html\" title=\"struct sdl3::iostream::IOStream\">IOStream</a>&lt;'_&gt;"]]],["symphonia_core",[["impl <a class=\"trait\" href=\"https://doc.rust-lang.org/1.85.0/std/io/trait.Seek.html\" title=\"trait std::io::Seek\">Seek</a> for <a class=\"struct\" href=\"symphonia_core/io/struct.MediaSourceStream.html\" title=\"struct symphonia_core::io::MediaSourceStream\">MediaSourceStream</a>"],["impl&lt;R: <a class=\"trait\" href=\"https://doc.rust-lang.org/1.85.0/std/io/trait.Read.html\" title=\"trait std::io::Read\">Read</a>&gt; <a class=\"trait\" href=\"https://doc.rust-lang.org/1.85.0/std/io/trait.Seek.html\" title=\"trait std::io::Seek\">Seek</a> for <a class=\"struct\" href=\"symphonia_core/io/struct.ReadOnlySource.html\" title=\"struct symphonia_core::io::ReadOnlySource\">ReadOnlySource</a>&lt;R&gt;"]]]]);
+    if (window.register_implementors) {
+        window.register_implementors(implementors);
+    } else {
+        window.pending_implementors = implementors;
+    }
+})()
+//{"start":57,"fragment_lengths":[568,276,734]}

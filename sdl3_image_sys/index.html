@@ -1,0 +1,97 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="sdl3-image-sys: Low level Rust bindings for SDL3_image"><title>sdl3_image_sys - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../static.files/rustdoc-46132b98.css"><meta name="rustdoc-vars" data-root-path="../" data-static-root-path="../static.files/" data-current-crate="sdl3_image_sys" data-themes="" data-resource-suffix="" data-rustdoc-version="1.85.0 (4d91de4e4 2025-02-17)" data-channel="1.85.0" data-search-js="search-75f5ac3e.js" data-settings-js="settings-0f613d39.js" ><script src="../static.files/storage-59e33391.js"></script><script defer src="../crates.js"></script><script defer src="../static.files/main-5f194d8c.js"></script><noscript><link rel="stylesheet" href="../static.files/noscript-893ab5e7.css"></noscript><link rel="alternate icon" type="image/png" href="../static.files/favicon-32x32-6580c154.png"><link rel="icon" type="image/svg+xml" href="../static.files/favicon-044be391.svg"></head><body class="rustdoc mod crate"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../sdl3_image_sys/index.html">sdl3_<wbr>image_<wbr>sys</a><span class="version">0.1.0</span></h2></div><div class="sidebar-elems"><ul class="block"><li><a id="all-types" href="all.html">All Items</a></li></ul><section id="rustdoc-toc"><h3><a href="#">Sections</a></h3><ul class="block top-toc"><li><a href="#sdl3-image-sys-low-level-rust-bindings-for-sdl3_image" title="sdl3-image-sys: Low level Rust bindings for SDL3_image">sdl3-image-sys: Low level Rust bindings for SDL3_image</a><ul><li><a href="#usage" title="Usage">Usage</a></li><li><a href="#other-features" title="Other features">Other features</a></li><li><a href="#version-history" title="Version history">Version history</a></li></ul></li></ul><h3><a href="#modules">Crate Items</a></h3><ul class="block"><li><a href="#modules" title="Modules">Modules</a></li></ul></section><div id="rustdoc-modnav"></div></div></nav><div class="sidebar-resizer"></div><main><div class="width-limiter"><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><h1>Crate <span>sdl3_image_sys</span><button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"><a class="src" href="../src/sdl3_image_sys/lib.rs.html#1-9">Source</a> </span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><h2 id="sdl3-image-sys-low-level-rust-bindings-for-sdl3_image"><a class="doc-anchor" href="#sdl3-image-sys-low-level-rust-bindings-for-sdl3_image">§</a>sdl3-image-sys: Low level Rust bindings for SDL3_image</h2>
+<p>These are low level Rust bindings for SDL3_image, an add-on library for
+<a href="https://libsdl.org">SDL 3</a> for loading images.
+This version of <code>sdl3-image-sys</code> has bindings for SDL_image version <code>3.2.0</code> and earlier.</p>
+<div class="warning">
+<p>Most of the docs are generated directly from the C headers and document how
+SDL works in C. Using it from Rust might work differently in some cases.
+For example, macros in C are usually translated to constants or constant
+functions in Rust. Documentation specific to these Rust bindings are tagged
+with <code>sdl3-sys</code>.</p>
+</div>
+<p><a href="https://docs.rs/sdl3-image-sys">Browse the API at docs.rs!</a></p>
+<h3 id="usage"><a class="doc-anchor" href="#usage">§</a>Usage</h3>
+<p><code>sdl3-image-sys</code> requires SDL_image version <code>3.2.0</code> or later.
+Some APIs may require a later version. You can check availability in the documentation.</p>
+<p>By default, <code>sdl3-image-sys</code> will attempt to link to a dynamic/shared library named
+<code>SDL3_image</code> in the default library search path, using the usual platform specific naming
+convention for libraries. You can change this behaviour with the following feature flags.</p>
+<div><table><thead><tr><th>Feature</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>use-pkg-config</code></td><td>Use <code>pkg-config</code> to find and link the SDL 3 library.</td></tr>
+<tr><td><code>use-vcpkg</code></td><td>Use <code>vcpkg</code> to find and link the SDL 3 library.</td></tr>
+<tr><td><code>build-from-source</code></td><td>Build and link SDL 3 from source. You have to install any dependencies SDL needs to build for your target first. See below for build related features.</td></tr>
+<tr><td><code>build-from-source-static</code></td><td>Shortcut for enabling both the <code>build-from-source</code> and <code>link-static</code> features. This should no longer be necessary.</td></tr>
+<tr><td><code>build-static-vendored</code></td><td>Build and link SDL_image from source, use vendored libraries (see below), and link it all statically.</td></tr>
+<tr><td><code>link-static</code></td><td>Link SDL_image statically.</td></tr>
+</tbody></table>
+</div><h4 id="building-from-source"><a class="doc-anchor" href="#building-from-source">§</a>Building from source</h4>
+<p>When building from source with the <code>build-from-source</code> feature flag, you can use
+features to configure which backends and image formats to support. Features marked with “(cmake)” below all have
+an <code>sdlimage-</code> prefix and correspond to SDL_image’s cmake variables. They’re autodetected if not set. You can use a <code>no-</code> prefix to disable a cmake feature,
+for example <code>no-sdlimage-png</code> disables png support. Activated
+features override features disabled with the <code>no-</code> prefix.</p>
+<p>If an image format is supported by an enabled backend, the backend will handle it and disabling the format’s feature has no effect.</p>
+<h5 id="defaults"><a class="doc-anchor" href="#defaults">§</a>Defaults</h5>
+<p>Backends and formats are autodetected by default. You can disable them by default instead and enable only the features you want.</p>
+<p>(These are not cmake features)</p>
+<div><table><thead><tr><th>Feature</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>no-default</code></td><td>Disable all backends and formats by default</td></tr>
+<tr><td><code>no-default-backends</code></td><td>Disable all backends by default</td></tr>
+<tr><td><code>no-default-formats</code></td><td>Disable all formats by default, except for formats supported by enabled backends</td></tr>
+</tbody></table>
+</div><h5 id="linking-and-vendoring"><a class="doc-anchor" href="#linking-and-vendoring">§</a>Linking and vendoring</h5><div><table><thead><tr><th>Feature (cmake)</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>vendored</code></td><td>Build dependencies from source as part of building SDL_image. SDL_image can vendor all external libraries, but this crate currently only includes support for vendoring the libraries for png and jpg formats for size reasons. (Also consider using the stb backend if you only need basic png and jpg support.)</td></tr>
+<tr><td><code>deps-shared</code></td><td>Use shared libraries for dependencies. You can also enable this for select libraries only, see below</td></tr>
+</tbody></table>
+</div><h5 id="backends"><a class="doc-anchor" href="#backends">§</a>Backends</h5>
+<p>Features for backends are enabled with a <code>sdlimage-backend-</code> prefix and disabled
+with <code>no-sdlimage-backend-</code>. For example, to enable the STB backend, enable the
+<code>sdlimage-backend-stb</code> feature. To disable it, enable the <code>no-sdlimage-backend-stb</code>
+feature. Enabled features override disabled features.</p>
+<div><table><thead><tr><th>Feature (cmake, backend)</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>stb</code></td><td>Use <a href="https://github.com/nothings/stb">stb_image</a> for loading supported formats (all targets). This backend is always vendored</td></tr>
+<tr><td><code>imageio</code></td><td>Use ImageIO for loading supported formats on Apple targets</td></tr>
+<tr><td><code>wic</code></td><td>Use WIC for loading supported formats on Microsoft targets</td></tr>
+</tbody></table>
+</div><h5 id="image-formats"><a class="doc-anchor" href="#image-formats">§</a>Image formats</h5>
+<p>These are enabled with an <code>sdlimage-</code> prefix and disabled with a <code>no-sdlimage-</code> prefix.</p>
+<div><table><thead><tr><th>Feature (cmake)</th><th style="text-align: center">Built-in</th><th style="text-align: center">STB</th><th style="text-align: center">WIC</th><th style="text-align: center">ImageIO</th><th>Library</th></tr></thead><tbody>
+<tr><td><code>avif</code></td><td style="text-align: center"></td><td style="text-align: center"></td><td style="text-align: center"></td><td style="text-align: center"></td><td>libavif (BSD-2-Clause) + aom (BSD-2-Clause) + dav1d (BSD-2-Clause) + …</td></tr>
+<tr><td><code>bmp</code></td><td style="text-align: center">✅</td><td style="text-align: center"></td><td style="text-align: center"></td><td style="text-align: center">✅</td><td></td></tr>
+<tr><td><code>gif</code></td><td style="text-align: center">✅</td><td style="text-align: center"></td><td style="text-align: center"></td><td style="text-align: center">✅</td><td></td></tr>
+<tr><td><code>jpg</code></td><td style="text-align: center"></td><td style="text-align: center">✅</td><td style="text-align: center">✅</td><td style="text-align: center">✅</td><td>libjpeg (IJG-short)</td></tr>
+<tr><td><code>jxl</code></td><td style="text-align: center"></td><td style="text-align: center"></td><td style="text-align: center"></td><td style="text-align: center"></td><td>libjxl (BSD-3-Clause) + …</td></tr>
+<tr><td><code>lbm</code></td><td style="text-align: center">✅</td><td style="text-align: center"></td><td style="text-align: center"></td><td style="text-align: center"></td><td></td></tr>
+<tr><td><code>pcx</code></td><td style="text-align: center">✅</td><td style="text-align: center"></td><td style="text-align: center"></td><td style="text-align: center"></td><td></td></tr>
+<tr><td><code>png</code></td><td style="text-align: center"></td><td style="text-align: center">✅</td><td style="text-align: center">✅</td><td style="text-align: center">✅</td><td>libpng (Libpng) + libz (Zlib)</td></tr>
+<tr><td><code>pnm</code></td><td style="text-align: center">✅</td><td style="text-align: center"></td><td style="text-align: center"></td><td style="text-align: center"></td><td></td></tr>
+<tr><td><code>qoi</code></td><td style="text-align: center">✅ (MIT)</td><td style="text-align: center"></td><td style="text-align: center"></td><td style="text-align: center"></td><td></td></tr>
+<tr><td><code>svg</code></td><td style="text-align: center">✅</td><td style="text-align: center"></td><td style="text-align: center"></td><td style="text-align: center"></td><td></td></tr>
+<tr><td><code>tga</code></td><td style="text-align: center">✅</td><td style="text-align: center"></td><td style="text-align: center"></td><td style="text-align: center">✅</td><td></td></tr>
+<tr><td><code>tif</code></td><td style="text-align: center"></td><td style="text-align: center"></td><td style="text-align: center">✅</td><td style="text-align: center">✅</td><td>libtiff (libtiff)</td></tr>
+<tr><td><code>webp</code></td><td style="text-align: center"></td><td style="text-align: center"></td><td style="text-align: center"></td><td style="text-align: center"></td><td>libwebp (BSD-3-Clause)</td></tr>
+<tr><td><code>xcf</code></td><td style="text-align: center">✅</td><td style="text-align: center"></td><td style="text-align: center"></td><td style="text-align: center"></td><td></td></tr>
+<tr><td><code>xpm</code></td><td style="text-align: center">✅</td><td style="text-align: center"></td><td style="text-align: center"></td><td style="text-align: center"></td><td></td></tr>
+<tr><td><code>xv</code></td><td style="text-align: center">✅</td><td style="text-align: center"></td><td style="text-align: center"></td><td style="text-align: center"></td><td></td></tr>
+</tbody></table>
+</div><h6 id="save-support"><a class="doc-anchor" href="#save-support">§</a>Save support</h6><div><table><thead><tr><th>Feature (cmake)</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>avif-save</code></td><td>Support saving images in avif format. Enables the <code>sdlimage-avif</code> feature</td></tr>
+<tr><td><code>jpg-save</code></td><td>Support saving images in jpg format. Enables the <code>sdlimage-jpg</code> feature</td></tr>
+<tr><td><code>png-save</code></td><td>Support saving images in png format. Enables the <code>sdlimage-png</code> feature</td></tr>
+</tbody></table>
+</div><h6 id="shared-linking"><a class="doc-anchor" href="#shared-linking">§</a>Shared linking</h6><div><table><thead><tr><th>Feature (cmake)</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>avif-shared</code></td><td>Use shared libraries for avif</td></tr>
+<tr><td><code>jpg-shared</code></td><td>Use shared library for jpeg</td></tr>
+<tr><td><code>jxl-shared</code></td><td>Use shared libraries for jxl</td></tr>
+<tr><td><code>png-shared</code></td><td>Use shared libraries for png</td></tr>
+<tr><td><code>tif-shared</code></td><td>Use shared library for tiff</td></tr>
+<tr><td><code>webp-shared</code></td><td>Use shared library for webp</td></tr>
+</tbody></table>
+</div><h3 id="other-features"><a class="doc-anchor" href="#other-features">§</a>Other features</h3><div><table><thead><tr><th>Feature</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>debug-impls</code></td><td>Implement the <code>Debug</code> trait for most SDL_image types.</td></tr>
+</tbody></table>
+</div><h3 id="version-history"><a class="doc-anchor" href="#version-history">§</a>Version history</h3>
+<ul>
+<li>0.1.0: First release</li>
+</ul>
+</div></details><h2 id="modules" class="section-header">Modules<a href="#modules" class="anchor">§</a></h2><ul class="item-table"><li><div class="item-name"><a class="mod" href="image/index.html" title="mod sdl3_image_sys::image">image</a></div><div class="desc docblock-short">Header file for SDL_image library</div></li></ul></section></div></main></body></html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Convenience function for straightforward audio init for the common case."><title>SDL_OpenAudioDeviceStream in sdl3_sys::audio - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../static.files/rustdoc-46132b98.css"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="sdl3_sys" data-themes="" data-resource-suffix="" data-rustdoc-version="1.85.0 (4d91de4e4 2025-02-17)" data-channel="1.85.0" data-search-js="search-75f5ac3e.js" data-settings-js="settings-0f613d39.js" ><script src="../../static.files/storage-59e33391.js"></script><script defer src="sidebar-items.js"></script><script defer src="../../static.files/main-5f194d8c.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-893ab5e7.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-6580c154.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg"></head><body class="rustdoc fn"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../../sdl3_sys/index.html">sdl3_<wbr>sys</a><span class="version">0.4.4+SDL3-3.2.4</span></h2></div><div class="sidebar-elems"><section id="rustdoc-toc"><h2 class="location"><a href="#">SDL_<wbr>Open<wbr>Audio<wbr>Device<wbr>Stream</a></h2><h3><a href="#">Sections</a></h3><ul class="block top-toc"><li><a href="#parameters" title="Parameters">Parameters</a></li><li><a href="#return-value" title="Return value">Return value</a></li><li><a href="#thread-safety" title="Thread safety">Thread safety</a></li><li><a href="#availability" title="Availability">Availability</a></li><li><a href="#see-also" title="See also">See also</a></li></ul></section><div id="rustdoc-modnav"><h2><a href="index.html">In sdl3_<wbr>sys::<wbr>audio</a></h2></div></div></nav><div class="sidebar-resizer"></div><main><div class="width-limiter"><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><span class="rustdoc-breadcrumbs"><a href="../index.html">sdl3_sys</a>::<wbr><a href="index.html">audio</a></span><h1>Function <span class="fn">SDL_OpenAudioDeviceStream</span><button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"><a class="src" href="../../src/sdl3_sys/generated/audio.rs.html#2345-2350">Source</a> </span></div><pre class="rust item-decl"><code>pub unsafe extern &quot;C&quot; fn SDL_OpenAudioDeviceStream(
+    devid: <a class="type" href="type.SDL_AudioDeviceID.html" title="type sdl3_sys::audio::SDL_AudioDeviceID">SDL_AudioDeviceID</a>,
+    spec: <a class="primitive" href="https://doc.rust-lang.org/1.85.0/core/primitive.pointer.html">*const </a><a class="struct" href="struct.SDL_AudioSpec.html" title="struct sdl3_sys::audio::SDL_AudioSpec">SDL_AudioSpec</a>,
+    callback: <a class="type" href="type.SDL_AudioStreamCallback.html" title="type sdl3_sys::audio::SDL_AudioStreamCallback">SDL_AudioStreamCallback</a>,
+    userdata: <a class="primitive" href="https://doc.rust-lang.org/1.85.0/core/primitive.pointer.html">*mut </a><a class="enum" href="https://doc.rust-lang.org/1.85.0/core/ffi/enum.c_void.html" title="enum core::ffi::c_void">c_void</a>,
+) -&gt; <a class="primitive" href="https://doc.rust-lang.org/1.85.0/core/primitive.pointer.html">*mut </a><a class="struct" href="struct.SDL_AudioStream.html" title="struct sdl3_sys::audio::SDL_AudioStream">SDL_AudioStream</a></code></pre><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Convenience function for straightforward audio init for the common case.</p>
+<p>If all your app intends to do is provide a single source of PCM audio, this
+function allows you to do all your audio setup in a single call.</p>
+<p>This is also intended to be a clean means to migrate apps from SDL2.</p>
+<p>This function will open an audio device, create a stream and bind it.
+Unlike other methods of setup, the audio device will be closed when this
+stream is destroyed, so the app can treat the returned <a href="struct.SDL_AudioStream.html" title="struct sdl3_sys::audio::SDL_AudioStream"><code>SDL_AudioStream</code></a> as
+the only object needed to manage audio playback.</p>
+<p>Also unlike other functions, the audio device begins paused. This is to map
+more closely to SDL2-style behavior, since there is no extra step here to
+bind a stream to begin audio flowing. The audio device should be resumed
+with <code>SDL_ResumeAudioStreamDevice(stream);</code></p>
+<p>This function works with both playback and recording devices.</p>
+<p>The <code>spec</code> parameter represents the app’s side of the audio stream. That
+is, for recording audio, this will be the output format, and for playing
+audio, this will be the input format. If spec is NULL, the system will
+choose the format, and the app can use <a href="fn.SDL_GetAudioStreamFormat.html" title="fn sdl3_sys::audio::SDL_GetAudioStreamFormat"><code>SDL_GetAudioStreamFormat()</code></a> to obtain
+this information later.</p>
+<p>If you don’t care about opening a specific audio device, you can (and
+probably <em>should</em>), use <a href="constant.SDL_AUDIO_DEVICE_DEFAULT_PLAYBACK.html" title="constant sdl3_sys::audio::SDL_AUDIO_DEVICE_DEFAULT_PLAYBACK"><code>SDL_AUDIO_DEVICE_DEFAULT_PLAYBACK</code></a> for playback and
+<a href="constant.SDL_AUDIO_DEVICE_DEFAULT_RECORDING.html" title="constant sdl3_sys::audio::SDL_AUDIO_DEVICE_DEFAULT_RECORDING"><code>SDL_AUDIO_DEVICE_DEFAULT_RECORDING</code></a> for recording.</p>
+<p>One can optionally provide a callback function; if NULL, the app is
+expected to queue audio data for playback (or unqueue audio data if
+capturing). Otherwise, the callback will begin to fire once the device is
+unpaused.</p>
+<p>Destroying the returned stream with <a href="fn.SDL_DestroyAudioStream.html" title="fn sdl3_sys::audio::SDL_DestroyAudioStream"><code>SDL_DestroyAudioStream</code></a> will also close
+the audio device associated with this stream.</p>
+<h4 id="parameters"><a class="doc-anchor" href="#parameters">§</a>Parameters</h4>
+<ul>
+<li><code>devid</code>: an audio device to open, or <a href="constant.SDL_AUDIO_DEVICE_DEFAULT_PLAYBACK.html" title="constant sdl3_sys::audio::SDL_AUDIO_DEVICE_DEFAULT_PLAYBACK"><code>SDL_AUDIO_DEVICE_DEFAULT_PLAYBACK</code></a>
+or <a href="constant.SDL_AUDIO_DEVICE_DEFAULT_RECORDING.html" title="constant sdl3_sys::audio::SDL_AUDIO_DEVICE_DEFAULT_RECORDING"><code>SDL_AUDIO_DEVICE_DEFAULT_RECORDING</code></a>.</li>
+<li><code>spec</code>: the audio stream’s data format. Can be NULL.</li>
+<li><code>callback</code>: a callback where the app will provide new data for
+playback, or receive new data for recording. Can be NULL,
+in which case the app will need to call
+<a href="fn.SDL_PutAudioStreamData.html" title="fn sdl3_sys::audio::SDL_PutAudioStreamData"><code>SDL_PutAudioStreamData</code></a> or <a href="fn.SDL_GetAudioStreamData.html" title="fn sdl3_sys::audio::SDL_GetAudioStreamData"><code>SDL_GetAudioStreamData</code></a> as
+necessary.</li>
+<li><code>userdata</code>: app-controlled pointer passed to callback. Can be NULL.
+Ignored if callback is NULL.</li>
+</ul>
+<h4 id="return-value"><a class="doc-anchor" href="#return-value">§</a>Return value</h4>
+<p>Returns an audio stream on success, ready to use, or NULL on failure; call
+<a href="../error/fn.SDL_GetError.html" title="fn sdl3_sys::error::SDL_GetError"><code>SDL_GetError()</code></a> for more information. When done with this stream,
+call <a href="fn.SDL_DestroyAudioStream.html" title="fn sdl3_sys::audio::SDL_DestroyAudioStream"><code>SDL_DestroyAudioStream</code></a> to free resources and close the
+device.</p>
+<h4 id="thread-safety"><a class="doc-anchor" href="#thread-safety">§</a>Thread safety</h4>
+<p>It is safe to call this function from any thread.</p>
+<h4 id="availability"><a class="doc-anchor" href="#availability">§</a>Availability</h4>
+<p>This function is available since SDL 3.2.0.</p>
+<h4 id="see-also"><a class="doc-anchor" href="#see-also">§</a>See also</h4>
+<ul>
+<li><a href="fn.SDL_GetAudioStreamDevice.html" title="fn sdl3_sys::audio::SDL_GetAudioStreamDevice"><code>SDL_GetAudioStreamDevice</code></a></li>
+<li><a href="fn.SDL_ResumeAudioStreamDevice.html" title="fn sdl3_sys::audio::SDL_ResumeAudioStreamDevice"><code>SDL_ResumeAudioStreamDevice</code></a></li>
+</ul>
+</div></details></section></div></main></body></html>
